@@ -1,0 +1,84 @@
+{
+  "token_value_usd": 0.001,
+  "margin": 0.25,
+  "safety_buffer": 0.25,
+  "min_charge_tokens": 5,
+  "models": {
+    "gpt-4o": {
+      "in_1k": 0.005,
+      "out_1k": 0.015
+    },
+    "gemini-pro": {
+      "in_1k": 0.001,
+      "out_1k": 0.002
+    },
+    "gemini-flash": {
+      "in_1k": 0.0001,
+      "out_1k": 0.0002
+    }
+  },
+  "audio": {
+    "tts_11labs": {
+      "per_min": 0.18
+    },
+    "stt": {
+      "per_min": 0.006
+    }
+  },
+  "video": {
+    "did": {
+      "sd_per_min": 0.20,
+      "hd_per_min": 0.40
+    }
+  },
+  "image": {
+    "gen": {
+      "1024": 0.020,
+      "2048": 0.080
+    }
+  },
+  "tools": {
+    "chat": {
+      "default_model": "gpt-4o",
+      "est_out_1k": 0.8
+    },
+    "flashcards": {
+      "llm": "gemini-flash",
+      "per_card_out_1k_est": 0.05
+    },
+    "ppt": {
+      "llm": "gpt-4o",
+      "per_slide_out_1k_est": 0.3,
+      "with_images": true,
+      "image_res": "1024",
+      "images_per_slide": 1
+    },
+    "short_video": {
+      "script_llm": "gpt-4o",
+      "script_out_1k_est": 1.5,
+      "quality": "hd"
+    },
+    "live_audio_chat": {
+      "llm": "gpt-4o",
+      "out_1k_per_min": 0.5
+    }
+  },
+  "routing": {
+    "chat": [
+      {
+        "if": "default",
+        "use": "gpt-4o"
+      }
+    ],
+    "ppt": [
+      {
+        "if": "slides <= 3",
+        "use": "gemini-pro"
+      },
+      {
+        "if": "default",
+        "use": "gpt-4o"
+      }
+    ]
+  }
+}
